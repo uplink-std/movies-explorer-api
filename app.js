@@ -7,7 +7,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const { PORT, CORS_CONFIG_ORIGIN } = require('./utils/constants');
+const { CORS_CONFIG_ORIGIN } = require('./utils/constants');
 const moviesRoute = require('./routes/movies');
 const NotFoundError = require('./errors/not-found-error');
 const { handleError } = require('./utils/errors');
@@ -37,4 +37,4 @@ app.use('/movies', moviesRoute);
 app.use((req, res, next) => handleError(new NotFoundError(`Ресурс не найден: ${req.originalUrl}`), res, next));
 app.use(errorLogger);
 
-app.listen(PORT);
+module.exports = app;

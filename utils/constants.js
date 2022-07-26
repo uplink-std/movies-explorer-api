@@ -14,6 +14,7 @@ const {
   JWT_SECRET = 'JWT_SECRET_KEY',
   PORT = 3000,
   CORS_CONFIG_ORIGIN = false,
+  LOG_LEVEL = 'info',
 } = process.env;
 
 module.exports = {
@@ -21,4 +22,5 @@ module.exports = {
   JWT_SECRET,
   PORT,
   CORS_CONFIG_ORIGIN,
+  LOG_LEVEL,
 };
