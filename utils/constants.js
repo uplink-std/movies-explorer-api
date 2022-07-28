@@ -17,10 +17,15 @@ const {
   LOG_LEVEL = 'info',
 } = process.env;
 
+const cookieKeys = {
+  jwt: 'MOVIES_EXPLORER_JWT',
+};
+
 module.exports = {
   httpStatus,
   JWT_SECRET,
   PORT,
   CORS_CONFIG_ORIGIN,
   LOG_LEVEL,
+  cookieKeys,
 };
