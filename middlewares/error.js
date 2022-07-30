@@ -5,7 +5,6 @@ function isNotMoviesExplorerError(error) {
   return !(error instanceof MoviesExplorerError);
 }
 
-// eslint-disable-next-line no-unused-vars
 const errorMiddleware = (err, req, res, next) => {
   let error = err;
   if (isNotMoviesExplorerError(err)) {
@@ -13,6 +12,7 @@ const errorMiddleware = (err, req, res, next) => {
   }
   res.status(error.statusCode || 500);
   res.send({ message: error.message });
+  next();
 };
 
 module.exports = { errorMiddleware };
