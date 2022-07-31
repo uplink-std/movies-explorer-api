@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const isURL = require('validator/es/lib/isURL');
+const { urlValidator } = require('../utils/joi-validation');
 
 const movieSchema = new mongoose.Schema({
   country: {
@@ -26,7 +26,7 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator: (urlInput) => isURL(urlInput) === undefined,
+      validator: (urlInput) => urlValidator.validate(urlInput).error === undefined,
       message: (props) => `${props.value} is not a valid url!`,
     },
   },
@@ -34,7 +34,7 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator: (urlInput) => isURL(urlInput) === undefined,
+      validator: (urlInput) => urlValidator.validate(urlInput).error === undefined,
       message: (props) => `${props.value} is not a valid url!`,
     },
   },
@@ -42,7 +42,7 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator: (urlInput) => isURL(urlInput) === undefined,
+      validator: (urlInput) => urlValidator.validate(urlInput).error === undefined,
       message: (props) => `${props.value} is not a valid url!`,
     },
   },
