@@ -1,5 +1,5 @@
 const Movie = require('../models/movie');
-const { httpStatus } = require('../utils/constants');
+const { httpStatus, messages } = require('../utils/constants');
 const { handleError } = require('../utils/errors');
 const NotFoundError = require('../errors/not-found-error');
 const ForbiddenError = require('../errors/forbidden-error');
@@ -46,10 +46,10 @@ const createMovie = (req, res, next) => {
 const deleteMovie = (req, res, next) => {
   const { movieId } = req.params;
   Movie.findById(movieId)
-    .orFail(() => new NotFoundError('Ресурс не найден'))
+    .orFail(() => new NotFoundError(messages.RESOURCE_NOT_FOUND))
     .then((movie) => {
       if (String(movie.owner._id) !== String(req.user._id)) {
-        throw new ForbiddenError('Нельзя удалить карту другого пользователя');
+        throw new ForbiddenError(messages.UNAUTHORIZED_MOVIE_DELETE);
       }
       return movie.remove();
     })

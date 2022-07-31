@@ -3,14 +3,15 @@ const MoviesExplorerError = require('../errors/movies-explorer-error');
 const ServerError = require('../errors/server-error');
 const BadRequestError = require('../errors/bad-request-error');
 const UserExistsError = require('../errors/user-exists-error');
+const { messages } = require('./constants');
 
 const isNotMoviesExplorerError = (error) => !(error instanceof MoviesExplorerError);
 
 const makeFromMongodbError = (error) => {
   if (error.code === 11000) {
-    return new UserExistsError('Пользователь с таким адресом электронной почты уже зарегистрирован');
+    return new UserExistsError(messages.USER_EXISTS);
   }
-  return new ServerError(`Ошибка при взаимодействии с базой данных: ${error.message}`);
+  return new ServerError(messages.DATABASE_ERROR);
 };
 
 const makeMoviesExplorerError = (error) => {
@@ -21,7 +22,7 @@ const makeMoviesExplorerError = (error) => {
   if (error.name === 'MongoServerError') {
     return makeFromMongodbError(error);
   }
-  return new ServerError('Ошибка на стороне сервера.');
+  return new ServerError(messages.SERVER_ERROR);
 };
 
 const handleError = (err, res, next) => {

@@ -1,7 +1,9 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const { handleNotFound, handleError } = require('../utils/errors');
-const { httpStatus, JWT_SECRET, cookieKeys } = require('../utils/constants');
+const {
+  httpStatus, JWT_SECRET, cookieKeys, messages,
+} = require('../utils/constants');
 
 function generateJwtToken(userId) {
   return jwt.sign(
@@ -63,7 +65,7 @@ const login = (req, res, next) => {
 
 const logout = (req, res) => {
   res.clearCookie(cookieKeys.jwt);
-  return res.status(httpStatus.ok).send({ message: 'Выполнен выход пользователя' });
+  return res.status(httpStatus.ok).send({ message: messages.SIGNOUT_SUCCESSFULLY });
 };
 
 module.exports = {

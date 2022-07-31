@@ -1,12 +1,12 @@
 const jwt = require('jsonwebtoken');
-const { JWT_SECRET, cookieKeys, publicRoutePaths } = require('../utils/constants');
+const {
+  JWT_SECRET, cookieKeys, publicRoutePaths, messages,
+} = require('../utils/constants');
 const { handleError } = require('../utils/errors');
 const AuthError = require('../errors/auth-error');
-const { serverLogger } = require('../utils/logger');
 
 function isPublicRoute(req) {
   const routePath = req.path;
-  serverLogger.info(`routePath = '${routePath}`);
   return publicRoutePaths.includes(routePath);
 }
 
@@ -15,7 +15,7 @@ function handleProtectedRoute(req, res, next) {
     req.user = jwt.verify(req.cookies[cookieKeys.jwt], JWT_SECRET);
     next();
   } catch (error) {
-    handleError(new AuthError('Ошибка авторизации'), res, next);
+    handleError(new AuthError(messages.UNAUTHORIZED), res, next);
   }
 }
 

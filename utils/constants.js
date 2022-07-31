@@ -29,6 +29,21 @@ const publicRoutePaths = [
   '/signup',
 ];
 
+const messages = {
+  UNAUTHORIZED_MOVIE_DELETE: 'Нельзя удалить фильм другого пользователя',
+  RESOURCE_NOT_FOUND: 'Ресурс не найден',
+  SIGNOUT_SUCCESSFULLY: 'Выполнен выход пользователя',
+  UNAUTHORIZED: 'Требуется авторизация',
+  SERVER_ERROR: 'Ошибка на стороне сервера',
+  INVALID_URL: 'Нарушен формат адреса ресурса (URL)',
+  INVALID_EMAIL: 'Нарушен формат адреса электронной почты',
+  INVALID_CREDENTIALS: 'Неправильно указаны почта или пароль',
+  DATABASE_ERROR: 'Ошибка при взаимодействии с базой данных',
+  USER_EXISTS: 'Пользователь с таким адресом электронной почты уже зарегистрирован',
+  APPLICATION_STARTED: 'Приложение запущено на порту:',
+
+};
+
 module.exports = {
   httpStatus,
   JWT_SECRET,
@@ -40,4 +55,5 @@ module.exports = {
   MONGO_USERNAME,
   MONGO_PASSWORD,
   publicRoutePaths,
+  messages,
 };
