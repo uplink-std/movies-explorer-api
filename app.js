@@ -6,17 +6,14 @@ const helmet = require('helmet');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const { errors, celebrate, Joi } = require('celebrate');
+const { errors } = require('celebrate');
 const mongoose = require('mongoose');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { CORS_CONFIG_ORIGIN } = require('./utils/constants');
-const moviesRoute = require('./routes/movies');
-const usersRoute = require('./routes/users');
+const appRoutes = require('./routes/index');
 const NotFoundError = require('./errors/not-found-error');
 const { handleError } = require('./utils/errors');
 const { authMiddleware } = require('./middlewares/auth');
-const { emailValidator, nameValidator, passwordValidator } = require('./utils/joi-validation');
-const { createUser, login, logout } = require('./controllers/users');
 const { errorMiddleware } = require('./middlewares/error');
 
 const app = express();
@@ -39,37 +36,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.post(
-  '/signup',
-  celebrate({
-    body: Joi.object().keys({
-      email: emailValidator.required(),
-      name: nameValidator.required(),
-      password: passwordValidator.required(),
-    }),
-  }),
-  createUser,
-);
-app.post(
-  '/signin',
-  celebrate({
-    body: Joi.object().keys({
-      email: emailValidator.required(),
-      password: passwordValidator.required(),
-    }),
-  }),
-  login,
-);
-
 app.use(authMiddleware);
 
-app.post(
-  '/signout',
-  logout,
-);
-
-app.use('/users', usersRoute);
-app.use('/movies', moviesRoute);
+app.use('/', appRoutes);
 
 app.use((req, res, next) => handleError(new NotFoundError(`Ресурс не найден: ${req.originalUrl}`), res, next));
 app.use(errorLogger);

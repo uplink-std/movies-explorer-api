@@ -24,6 +24,11 @@ const cookieKeys = {
   jwt: 'MOVIES_EXPLORER_JWT',
 };
 
+const publicRoutePaths = [
+  '/signin',
+  '/signup',
+];
+
 module.exports = {
   httpStatus,
   JWT_SECRET,
@@ -34,4 +39,5 @@ module.exports = {
   MONGODB_URL,
   MONGO_USERNAME,
   MONGO_PASSWORD,
+  publicRoutePaths,
 };
