@@ -7,9 +7,11 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { errors, celebrate, Joi } = require('celebrate');
+const mongoose = require('mongoose');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { CORS_CONFIG_ORIGIN } = require('./utils/constants');
 const moviesRoute = require('./routes/movies');
+const usersRoute = require('./routes/users');
 const NotFoundError = require('./errors/not-found-error');
 const { handleError } = require('./utils/errors');
 const { authMiddleware } = require('./middlewares/auth');
@@ -66,12 +68,14 @@ app.post(
   logout,
 );
 
-app.use('/users', moviesRoute);
+app.use('/users', usersRoute);
 app.use('/movies', moviesRoute);
 
 app.use((req, res, next) => handleError(new NotFoundError(`Ресурс не найден: ${req.originalUrl}`), res, next));
 app.use(errorLogger);
 app.use(errors());
 app.use(errorMiddleware);
+
+mongoose.set('runValidators', true);
 
 module.exports = app;

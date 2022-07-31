@@ -1,12 +1,7 @@
-const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const { handleNotFound, handleError } = require('../utils/errors');
 const { httpStatus, JWT_SECRET, cookieKeys } = require('../utils/constants');
-
-function getPasswordHash(password) {
-  return bcrypt.hash(password, 10);
-}
 
 function generateJwtToken(userId) {
   return jwt.sign(
@@ -29,7 +24,7 @@ const createUser = (req, res, next) => {
     email,
     password,
   } = req.body;
-  getPasswordHash(password)
+  User.getPasswordHash(password)
     .then((passwordHash) => User.create({
       name,
       email,

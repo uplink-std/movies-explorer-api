@@ -15,6 +15,9 @@ const {
   PORT = 3000,
   CORS_CONFIG_ORIGIN = false,
   LOG_LEVEL = 'info',
+  MONGODB_URL = 'mongodb://localhost:27017/moviesdb?authSource=admin',
+  MONGO_USERNAME = '',
+  MONGO_PASSWORD = '',
 } = process.env;
 
 const cookieKeys = {
@@ -28,4 +31,7 @@ module.exports = {
   CORS_CONFIG_ORIGIN,
   LOG_LEVEL,
   cookieKeys,
+  MONGODB_URL,
+  MONGO_USERNAME,
+  MONGO_PASSWORD,
 };

@@ -27,6 +27,10 @@ const userSchema = new mongoose.Schema({
   },
 });
 
+userSchema.statics.getPasswordHash = function getPasswordHash(password) {
+  return bcrypt.hash(password, 10);
+};
+
 userSchema.statics.findUserByCredentials = function findUserByCredentials(email, password) {
   return this.findOne({ email }).select('+password')
     .then((user) => {
