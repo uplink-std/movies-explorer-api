@@ -11,6 +11,7 @@ const { CORS_CONFIG_ORIGIN } = require('./utils/constants');
 const moviesRoute = require('./routes/movies');
 const NotFoundError = require('./errors/not-found-error');
 const { handleError } = require('./utils/errors');
+const { authMiddleware } = require('./middlewares/auth');
 
 const app = express();
 
@@ -31,6 +32,8 @@ app.set('trust proxy', 1);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+app.use(authMiddleware);
 
 app.use('/users', moviesRoute);
 app.use('/movies', moviesRoute);
