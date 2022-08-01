@@ -2,8 +2,8 @@ const router = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
 const { getMovies, createMovie, deleteMovie } = require('../controllers/movies');
 const {
-  urlValidator,
-} = require('../utils/joi-validation');
+  joiUrlValidator,
+} = require('../utils/validation');
 
 router.get('/', getMovies);
 router.post(
@@ -15,9 +15,9 @@ router.post(
       duration: Joi.number().required(),
       year: Joi.string().required(),
       description: Joi.string().required(),
-      image: urlValidator.required(),
-      trailerLink: urlValidator.required(),
-      thumbnail: urlValidator.required(),
+      image: joiUrlValidator.required(),
+      trailerLink: joiUrlValidator.required(),
+      thumbnail: joiUrlValidator.required(),
       movieId: Joi.number().required(),
       nameRU: Joi.string().required(),
       nameEN: Joi.string().required(),

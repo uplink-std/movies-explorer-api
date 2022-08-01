@@ -6,17 +6,17 @@ const {
 } = require('../controllers/users');
 
 const {
-  nameValidator,
-  emailValidator,
-} = require('../utils/joi-validation');
+  joiNameValidator,
+  joiEmailValidator,
+} = require('../utils/validation');
 
 router.get('/me', getLoggedUser);
 router.patch(
   '/me',
   celebrate({
     body: Joi.object().keys({
-      name: nameValidator.required(),
-      email: emailValidator.required(),
+      name: joiNameValidator.required(),
+      email: joiEmailValidator.required(),
     }),
   }),
   updateUser,

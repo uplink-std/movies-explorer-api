@@ -1,11 +1,5 @@
 const mongoose = require('mongoose');
-const { urlValidator } = require('../utils/joi-validation');
-const { messages } = require('../utils/constants');
-
-const urlValidation = {
-  validator: (urlInput) => urlValidator.validate(urlInput).error === undefined,
-  message: () => messages.INVALID_URL,
-};
+const { mongoUrlValidator } = require('../utils/validation');
 
 const movieSchema = new mongoose.Schema({
   country: {
@@ -31,17 +25,17 @@ const movieSchema = new mongoose.Schema({
   image: {
     type: String,
     required: true,
-    validate: urlValidation,
+    validate: mongoUrlValidator,
   },
   trailerLink: {
     type: String,
     required: true,
-    validate: urlValidation,
+    validate: mongoUrlValidator,
   },
   thumbnail: {
     type: String,
     required: true,
-    validate: urlValidation,
+    validate: mongoUrlValidator,
   },
   owner: {
     required: true,

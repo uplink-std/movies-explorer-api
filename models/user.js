@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-const { emailValidator } = require('../utils/joi-validation');
+const { mongoEmailValidator } = require('../utils/validation');
 const AuthError = require('../errors/auth-error');
 const { messages } = require('../utils/constants');
 
@@ -9,10 +9,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
-    validate: {
-      validator: (emailInput) => emailValidator.validate(emailInput).error === undefined,
-      message: () => messages.INVALID_EMAIL,
-    },
+    validate: mongoEmailValidator,
   },
   password: {
     type: String,
