@@ -11,8 +11,6 @@ const mongoose = require('mongoose');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { CORS_CONFIG_ORIGIN } = require('./utils/constants');
 const appRoutes = require('./routes/index');
-const NotFoundError = require('./errors/not-found-error');
-const { handleError } = require('./utils/errors');
 const { authMiddleware } = require('./middlewares/auth');
 const { errorMiddleware } = require('./middlewares/error');
 
@@ -40,7 +38,6 @@ app.use(authMiddleware);
 
 app.use('/', appRoutes);
 
-app.use((req, res, next) => handleError(new NotFoundError(`Ресурс не найден: ${req.originalUrl}`), res, next));
 app.use(errorLogger);
 app.use(errors());
 app.use(errorMiddleware);

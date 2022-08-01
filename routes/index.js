@@ -5,6 +5,8 @@ const { joiEmailValidator, joiNameValidator, joiPasswordValidator } = require('.
 const { createUser, login, logout } = require('../controllers/users');
 const usersRoute = require('./users');
 const moviesRoute = require('./movies');
+const { handleError } = require('../utils/errors');
+const NotFoundError = require('../errors/not-found-error');
 
 router.post(
   '/signup',
@@ -35,5 +37,7 @@ router.post(
 
 router.use('/users', usersRoute);
 router.use('/movies', moviesRoute);
+
+router.use((req, res, next) => handleError(new NotFoundError(`Ресурс не найден: ${req.originalUrl}`), res, next));
 
 module.exports = router;

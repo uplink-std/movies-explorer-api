@@ -6,7 +6,7 @@ const isValidUrl = (value) => validator.isURL(value, URL_VALIDATOR_OPTIONS);
 const isValidEmail = (value) => validator.isEmail(value);
 
 const joiEmailValidator = Joi.string().custom(
-  (value, helper) => (isValidEmail(value) ? true : helper.message(messages.INVALID_EMAIL)),
+  (value, helper) => (isValidEmail(value) ? value : helper.message(messages.INVALID_EMAIL)),
 );
 
 const joiPasswordValidator = Joi.string().min(2);
@@ -14,7 +14,7 @@ const joiPasswordValidator = Joi.string().min(2);
 const joiNameValidator = Joi.string().min(2).max(30);
 
 const joiUrlValidator = Joi.string().custom(
-  (value, helper) => (isValidUrl(value) ? true : helper.message(messages.INVALID_URL)),
+  (value, helper) => (isValidUrl(value) ? value : helper.message(messages.INVALID_URL)),
 );
 
 const joiIdValidator = Joi.string().hex().length(24);

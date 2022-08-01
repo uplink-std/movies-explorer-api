@@ -46,9 +46,10 @@ const messages = {
 
 const URL_VALIDATOR_OPTIONS = {
   protocols: ['http', 'https'],
-  require_protocol: true,
+  require_protocol: false,
   require_valid_protocol: true,
-  allow_protocol_relative_urls: false,
+  require_host: false,
+  allow_protocol_relative_urls: true,
 };
 
 module.exports = {
