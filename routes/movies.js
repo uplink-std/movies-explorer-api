@@ -19,7 +19,7 @@ router.post(
       trailerLink: urlValidator.required(),
       thumbnail: urlValidator.required(),
       owner: idValidator.required(),
-      movieId: idValidator.required(),
+      movieId: Joi.number().required(),
       nameRU: Joi.string().required(),
       nameEN: Joi.string().required(),
     }),
@@ -30,7 +30,7 @@ router.delete(
   '/:movieId',
   celebrate({
     params: Joi.object().keys({
-      movieId: idValidator.required(),
+      movieId: Joi.number().required(),
     }),
   }),
   createMovie,
