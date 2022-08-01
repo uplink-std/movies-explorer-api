@@ -44,6 +44,13 @@ const messages = {
 
 };
 
+const URL_VALIDATOR_OPTIONS = {
+  protocols: ['http', 'https'],
+  require_protocol: true,
+  require_valid_protocol: true,
+  allow_protocol_relative_urls: false,
+};
+
 module.exports = {
   httpStatus,
   JWT_SECRET,
@@ -56,4 +63,5 @@ module.exports = {
   MONGO_PASSWORD,
   publicRoutePaths,
   messages,
+  URL_VALIDATOR_OPTIONS,
 };
