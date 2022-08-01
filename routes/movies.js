@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
-const { getMovies, createMovie } = require('../controllers/movies');
+const { getMovies, createMovie, deleteMovie } = require('../controllers/movies');
 const {
   urlValidator,
 } = require('../utils/joi-validation');
@@ -32,7 +32,7 @@ router.delete(
       movieId: Joi.number().required(),
     }),
   }),
-  createMovie,
+  deleteMovie,
 );
 
 module.exports = router;
