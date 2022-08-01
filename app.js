@@ -1,13 +1,13 @@
 require('dotenv').config();
 
 const express = require('express');
-const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
 const mongoose = require('mongoose');
+const limiter = require('./limiter');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { CORS_CONFIG_ORIGIN } = require('./utils/constants');
 const appRoutes = require('./routes/index');
@@ -15,11 +15,6 @@ const { authMiddleware } = require('./middlewares/auth');
 const { errorMiddleware } = require('./middlewares/error');
 
 const app = express();
-
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 200,
-});
 
 app.use(requestLogger);
 app.use(limiter);
