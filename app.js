@@ -31,7 +31,7 @@ app.use(cookieParser());
 
 app.use(authMiddleware);
 
-app.use('/', appRoutes);
+app.use(appRoutes);
 
 app.use(errorLogger);
 app.use(errors());
