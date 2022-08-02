@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
 const { getMovies, createMovie, deleteMovie } = require('../controllers/movies');
 const {
-  joiUrlValidator,
+  joiUrlValidator, joiIdValidator,
 } = require('../utils/validation');
 
 router.get('/', getMovies);
@@ -26,10 +26,10 @@ router.post(
   createMovie,
 );
 router.delete(
-  '/:movieId',
+  '/:id',
   celebrate({
     params: Joi.object().keys({
-      movieId: Joi.number().required(),
+      id: joiIdValidator.required(),
     }),
   }),
   deleteMovie,
