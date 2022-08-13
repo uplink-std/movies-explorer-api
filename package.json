@@ -1,6 +1,6 @@
 {
   "name": "movies-explorer-api",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -12,6 +12,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/uplink-std/movies-explorer-api.git"
+  },
+  "publishConfig": {
+    "registry": "https://nexus.prv.zinovev.net/repository/npm__releases/"
   },
   "keywords": [
     "diplom",
